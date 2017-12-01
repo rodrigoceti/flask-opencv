@@ -1,17 +1,15 @@
 import os
 from flask import Flask, request, redirect, url_for, jsonify
-from flask_restful import Resource, Api
-
 from werkzeug.utils import secure_filename
 
 import cv2
 import numpy as np
 
 UPLOAD_FOLDER = './images'
-CONVERTED_FOLDER = './converted'
+CONVERTED_FOLDER = './static'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['CONVERTED_FOLDER'] = CONVERTED_FOLDER
 
@@ -81,3 +79,5 @@ def upload_file():
         cv2.imwrite('./converted/' + filename_no_ext + '.png',  img_a*255)
 
     return jsonify(url = os.path.join(app.config['UPLOAD_FOLDER'],filename))
+
+app.run(host= '0.0.0.0')
