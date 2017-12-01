@@ -80,4 +80,4 @@ def upload_file():
 
     return jsonify(url = os.path.join(app.config['UPLOAD_FOLDER'],filename))
 
-app.run(host= '0.0.0.0')
+app.run(host='0.0.0.0',threaded=True)
