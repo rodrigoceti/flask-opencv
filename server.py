@@ -76,7 +76,7 @@ def upload_file():
         c_red, c_green, c_blue = cv2.split(img)
         img_a = cv2.merge((c_red, c_green, c_blue, mask.astype('float32') / 255.0))
 
-        cv2.imwrite('./converted/' + filename_no_ext + '.png',  img_a*255)
+        cv2.imwrite('./static/' + filename_no_ext + '.png',  img_a*255)
 
     return jsonify(url = os.path.join(app.config['UPLOAD_FOLDER'],filename))
 
